@@ -1,0 +1,8 @@
+schema: olm.composite.catalogs
+catalogs:
+  - name: v4.13
+    destination:
+      baseImage: quay.io/operator-framework/opm:v1.26
+      workingDir: {{dir}}/fbc-veneer-demo
+    builders:
+      - olm.veneer.basic

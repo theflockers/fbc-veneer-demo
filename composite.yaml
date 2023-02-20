@@ -1,0 +1,12 @@
+schema: olm.composite
+components:
+  - name: v4.13
+    destination:
+      path: v4.13/catalog
+    strategy:
+      name: basic
+      veneer:
+        schema: olm.veneer.basic
+        config: 
+          input: components/v4.13.yaml
+          output: catalog.yaml
