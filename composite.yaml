@@ -1,12 +1,22 @@
 schema: olm.composite
 components:
-  - name: v4.13
+  - name: "4.13"
     destination:
-      path: v4.13/catalog
+      path: 4.13/catalog
     strategy:
       name: basic
-      veneer:
-        schema: olm.veneer.basic
+      template:
+        schema: olm.builder.basic
         config: 
-          input: components/v4.13.yaml
-          output: catalog.yaml
+          input: components/4.13.yaml
+          output: catalog.json
+  - name: "4.12"
+    destination:
+      path: 4.12/catalog
+    strategy:
+      name: basic
+      template:
+        schema: olm.builder.basic
+        config: 
+          input: components/4.12.yaml
+          output: catalog.json

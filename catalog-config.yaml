@@ -1,8 +1,14 @@
 schema: olm.composite.catalogs
 catalogs:
-  - name: v4.13
+  - name: "4.13"
     destination:
       baseImage: quay.io/operator-framework/opm:v1.26
-      workingDir: {{dir}}/fbc-veneer-demo
+      workingDir: .
     builders:
-      - olm.veneer.basic
+      - olm.builder.basic
+  - name: "4.12"
+    destination:
+      baseImage: quay.io/operator-framework/opm:v1.26
+      workingDir: .
+    builders:
+      - olm.builder.basic
