@@ -1,0 +1,1136 @@
+---
+defaultChannel: stable
+name: kubevirt-hyperconverged
+schema: olm.package
+---
+entries:
+- name: kubevirt-hyperconverged-operator.v4.10.0
+- name: kubevirt-hyperconverged-operator.v4.10.1
+  replaces: kubevirt-hyperconverged-operator.v4.10.0
+- name: kubevirt-hyperconverged-operator.v4.10.2
+  replaces: kubevirt-hyperconverged-operator.v4.10.1
+- name: kubevirt-hyperconverged-operator.v4.10.3
+  replaces: kubevirt-hyperconverged-operator.v4.10.1
+  skips:
+  - kubevirt-hyperconverged-operator.v4.10.2
+name: stable
+package: kubevirt-hyperconverged
+schema: olm.channel
+---
+image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:35b29e8eb48d9818a1217d5b89e4dcb7a900c5c5e6ae3745683813c5708c86e9
+name: kubevirt-hyperconverged-operator.v4.10.0
+package: kubevirt-hyperconverged
+properties:
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hco.kubevirt.io
+    kind: HyperConverged
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1alpha3
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: nodemaintenance.kubevirt.io
+    kind: NodeMaintenance
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: ssp.kubevirt.io
+    kind: SSP
+    version: v1beta1
+- type: olm.package
+  value:
+    packageName: kubevirt-hyperconverged
+    version: 4.10.0
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: '[{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}},{"apiVersion":"networkaddonsoperator.network.kubevirt.io/v1","kind":"NetworkAddonsConfig","metadata":{"name":"cluster"},"spec":{"imagePullPolicy":"IfNotPresent","kubeMacPool":{"rangeEnd":"FD:FF:FF:FF:FF:FF","rangeStart":"02:00:00:00:00:00"},"linuxBridge":{},"macvtap":{},"multus":{},"nmstate":{},"ovs":{}}},{"apiVersion":"kubevirt.io/v1","kind":"KubeVirt","metadata":{"name":"kubevirt","namespace":"kubevirt"},"spec":{"imagePullPolicy":"Always"}},{"apiVersion":"ssp.kubevirt.io/v1beta1","kind":"SSP","metadata":{"name":"ssp-sample","namespace":"kubevirt"},"spec":{"commonTemplates":{"namespace":"kubevirt"},"templateValidator":{"replicas":2}}},{"apiVersion":"cdi.kubevirt.io/v1beta1","kind":"CDI","metadata":{"name":"cdi","namespace":"cdi"},"spec":{"imagePullPolicy":"IfNotPresent"}},{"apiVersion":"nodemaintenance.kubevirt.io/v1beta1","kind":"NodeMaintenance","metadata":{"name":"nodemaintenance-sample"},"spec":{"nodeName":"node02","reason":"Test
+        node maintenance"}},{"apiVersion":"hostpathprovisioner.kubevirt.io/v1beta1","kind":"HostPathProvisioner","metadata":{"name":"hostpath-provisioner"},"spec":{"imagePullPolicy":"IfNotPresent","storagePools":[{"name":"local","path":"/var/hpvolumes","pvcTemplate":{"accessModes":"ReadWriteOnce","resources":{"requests":{"storage":"50Gi"}}}}],"workload":{"nodeSelector":{"kubernetes.io/os":"linux"}}}}]'
+      capabilities: Deep Insights
+      categories: OpenShift Optional
+      certified: "true"
+      containerImage: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:4c101dbefe4ea1cfb0fdfb605221c88f46513da6936d308c9a77bcc49aa37324
+      createdAt: "2022-02-28 10:16:34"
+      description: Creates and maintains an OpenShift Virtualization Deployment
+      olm.skipRange: '>=4.9.3 <4.10.0'
+      operatorframework.io/initialization-resource: '{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}}'
+      operatorframework.io/suggested-namespace: openshift-cnv
+      operators.openshift.io/infrastructure-features: '["disconnected","proxy-aware","fips","sno"]'
+      operators.operatorframework.io/internal-objects: '["networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io","kubevirts.kubevirt.io","ssps.ssp.kubevirt.io","cdis.cdi.kubevirt.io","nodemaintenances.nodemaintenance.kubevirt.io"]'
+      repository: https://github.com/kubevirt/hyperconverged-cluster-operator
+      support: Red Hat
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - description: Represents the deployment of OpenShift Virtualization
+        displayName: OpenShift Virtualization Deployment
+        kind: HyperConverged
+        name: hyperconvergeds.hco.kubevirt.io
+        specDescriptors:
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components node affinity
+          path: infra.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components pod affinity
+          path: infra.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the infra pods.
+          displayName: Infra components pod anti-affinity
+          path: infra.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components node affinity
+          path: workloads.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components pod affinity
+          path: workloads.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the workloads pods.
+          displayName: Workloads components pod anti-affinity
+          path: workloads.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: HIDDEN FIELDS - operator version.
+          displayName: HIDDEN FIELDS - operator version
+          path: version
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:hidden
+        version: v1beta1
+      - description: Cluster Network Addons
+        displayName: Cluster Network Addons
+        kind: NetworkAddonsConfig
+        name: networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io
+        version: v1
+      - description: Represents a KubeVirt deployment
+        displayName: KubeVirt deployment
+        kind: KubeVirt
+        name: kubevirts.kubevirt.io
+        version: v1
+      - description: SSP is the Schema for the ssps API
+        displayName: SSP
+        kind: SSP
+        name: ssps.ssp.kubevirt.io
+        version: v1beta1
+      - description: Represents a CDI deployment
+        displayName: CDI deployment
+        kind: CDI
+        name: cdis.cdi.kubevirt.io
+        version: v1beta1
+      - description: NodeMaintenance is the Schema for the nodemaintenances API
+        displayName: Node Maintenance
+        kind: NodeMaintenance
+        name: nodemaintenances.nodemaintenance.kubevirt.io
+        version: v1beta1
+      - description: Represents a HostPathProvisioner deployment
+        displayName: HostPathProvisioner deployment
+        kind: HostPathProvisioner
+        name: hostpathprovisioners.hostpathprovisioner.kubevirt.io
+        version: v1beta1
+    description: |-
+      # Requirements
+      Your cluster must be installed on bare metal infrastructure with Red Hat Enterprise Linux CoreOS workers.
+
+      # Details
+      **OpenShift Virtualization** extends Red Hat OpenShift Container Platform, allowing you to host and manage virtualized workloads on the same platform as container-based workloads. From the OpenShift Container Platform web console, you can import a VMware virtual machine from vSphere, create new or clone existing VMs, perform live migrations between nodes, and more. You can use OpenShift Virtualization to manage both Linux and Windows VMs.
+
+      The technology behind OpenShift Virtualization is developed in the [KubeVirt](https://kubevirt.io) open source community. The KubeVirt project extends [Kubernetes](https://kubernetes.io) by adding additional virtualization resource types through [Custom Resource Definitions](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/) (CRDs). Administrators can use Custom Resource Definitions to manage `VirtualMachine` resources alongside all other resources that Kubernetes provides.
+    displayName: OpenShift Virtualization
+    installModes:
+    - supported: true
+      type: OwnNamespace
+    - supported: true
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: false
+      type: AllNamespaces
+    keywords:
+    - KubeVirt
+    - Virtualization
+    - VM
+    - CNV
+    - Container-native virtualization
+    - Container native virtualization
+    - Virt
+    - Virtual
+    links:
+    - name: Source Code
+      url: https://github.com/kubevirt
+    - name: OpenShift Virtualization
+      url: https://www.openshift.com/learn/topics/virtualization/
+    - name: KubeVirt Project
+      url: https://kubevirt.io
+    maintainers:
+    - email: support@redhat.com
+      name: Red Hat Support
+    maturity: alpha
+    provider:
+      name: Red Hat
+relatedImages:
+- image: registry.redhat.io/container-native-virtualization/bridge-marker@sha256:1d0af4a313a1254a220fa18de56e3f94f77b0be5ef90bf9fcce3d183a89c7574
+  name: registry.redhat.io/container-native-virtualization/bridge-marker:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator@sha256:954586158a17d6669a1c56c2c0dce651ff7e584e82abd03982fbeb13989d12a4
+  name: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins@sha256:40dc5ed69ded75633079f006f1242633aa371eeb12b7aab985c5815b7834ed18
+  name: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8@sha256:ad5129b71f9a4fbc1dee6a801bd5da626d9bed34d12980a0d61a6d08fc0baa79
+  name: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8:v4.10.0-110
+- image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:35b29e8eb48d9818a1217d5b89e4dcb7a900c5c5e6ae3745683813c5708c86e9
+  name: ""
+- image: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8@sha256:eaac430e1125e1911154b34bc38a158e037de7ac109e0310d718c5203cdeb2c6
+  name: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8:v4.10.0-32
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator@sha256:2a31557dbe34f4256041390afa24d58cfd73d5e9ed5d16b55fdd79b8648fb944
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator:v4.10.0-62
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8@sha256:39212f46d4f713e625240faba38109379ab61f4e6f9394e2393048f145f26db2
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8:v4.10.0-32
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:4c101dbefe4ea1cfb0fdfb605221c88f46513da6936d308c9a77bcc49aa37324
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator:v4.10.0-133
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8@sha256:c4eae4d62df4cb56e6d6cf482e6261abe6b03fca514472a606adc8f6c2ed1797
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8:v4.10.0-133
+- image: registry.redhat.io/container-native-virtualization/kubemacpool@sha256:e097e1fd826de43c239f13bb1c596ae419a47158bc6a2059439572df37ae43e2
+  name: registry.redhat.io/container-native-virtualization/kubemacpool:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8@sha256:514f252aed01a3ce66321132848b77a08e6eac4253420aaa8d8416d368578a92
+  name: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator@sha256:0dcf8a2acc677dffacf654033790f64d4da009a4e860c5f2af776deae52473b0
+  name: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator:v4.10.0-50
+- image: registry.redhat.io/container-native-virtualization/kubevirt-template-validator@sha256:6bd443f68b56022c47e44a3d2e3fb842e33b94795c3714659cd8a9e8f18d1b98
+  name: registry.redhat.io/container-native-virtualization/kubevirt-template-validator:v4.10.0-16
+- image: registry.redhat.io/container-native-virtualization/kubevirt-velero-plugin-rhel8@sha256:0c5c9c6a12f906a092d105842158a1eda8c21b9681b0bbd6f51a829d927bde60
+  name: registry.redhat.io/container-native-virtualization/kubevirt-velero-plugin-rhel8:v4.10.0-8
+- image: registry.redhat.io/container-native-virtualization/libguestfs-tools@sha256:cd346070c2eee22b26e4c99e7570a4bc56c70a26567ba77b75f3af1013ed7fa4
+  name: registry.redhat.io/container-native-virtualization/libguestfs-tools:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/node-maintenance-operator@sha256:9fbce4967fff418d41dc126347f4a8bc8fb794ebf5fc1b27b511391e735b2778
+  name: registry.redhat.io/container-native-virtualization/node-maintenance-operator:v4.10.0-48
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-marker@sha256:2c6835eeb205811081ba251791dd42b98346b3d37904c12a3b8f07383d35dcf9
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-marker:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-plugin@sha256:b79d00a903c5c4a885cea9a9493bb01f83bf0fb09cdbe56eeee4ea6ed8422acd
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-plugin:v4.10.0-49
+- image: registry.redhat.io/container-native-virtualization/virt-api@sha256:1f6c8c62264c71cdb8c795e68dc473a4300fa818dcd63c6692e08ab392f4bb65
+  name: registry.redhat.io/container-native-virtualization/virt-api:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virt-artifacts-server@sha256:cb9cff4aa059afd8b70ee872d3a4fa250e7b5f1bf9f2067eaf35c779ae86a693
+  name: registry.redhat.io/container-native-virtualization/virt-artifacts-server:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver@sha256:0ddbb3b091287796d2f634f20d74a259426c8db18ddcd771acfb81abe05c195c
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-cloner@sha256:2cef5706d7cedc9752e07a468f60c9df978eb4a3fd840534c30317f95e027aee
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-cloner:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-controller@sha256:afc00dbf9861dcbad0e32488795ef669ab5f00dc7aaf863dfea33798784b9ee4
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-controller:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-importer@sha256:59ab2b490c9833db3e220abb54c52e9aad29439c594e55ec9165c714238fd6fb
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-importer:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-operator@sha256:be4da759c9523af52650bf4c33abb4fc1be41faf47cf930955e842e9d7f42d94
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-operator:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy@sha256:7cbaf9febc9e22969caaebd76668162af632c5e3fad4ad9aecbf9e19580f8ad8
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver@sha256:69b9f47e1c1c2648765d044b23f013ec1b9f76eebc33632d521e66df039023e4
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver:v4.10.0-90
+- image: registry.redhat.io/container-native-virtualization/virt-controller@sha256:fffbe0cb136a7f5c1076223689ebf299268d38e0f5fd49083fc59cce6b5e2637
+  name: registry.redhat.io/container-native-virtualization/virt-controller:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virt-handler@sha256:ed924333ab3cdf4e5bfe77a8f52acc9b2038b96fd5bcd4c27b814582d78a931a
+  name: registry.redhat.io/container-native-virtualization/virt-handler:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virt-launcher@sha256:f4d59e9da40b39243b41c781ea0e03c9c89d6c75fb187a69c0c54d655d37c155
+  name: registry.redhat.io/container-native-virtualization/virt-launcher:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virt-operator@sha256:e88069dd11e1dd8f785fc522651eebb07a6a6f105b986e4d70ed5c8b26fe08c8
+  name: registry.redhat.io/container-native-virtualization/virt-operator:v4.10.0-217
+- image: registry.redhat.io/container-native-virtualization/virtio-win@sha256:64c840592a167a530579b6f47f937c54140125b207d9e60f57d6472b5b99ea55
+  name: registry.redhat.io/container-native-virtualization/virtio-win:v4.10.0-10
+- image: registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:8b2656b9ba4eee9c47005f7d564fd5fd472a495f686961bb11ce084d87a8c16c
+  name: registry.redhat.io/openshift4/ose-csi-external-provisioner:v4.9
+- image: registry.redhat.io/openshift4/ose-csi-external-snapshotter@sha256:dab8d7f0be8b58d98efd7e7707a8269d8e138779a00fe06bb33e87f9ef97eb3e
+  name: registry.redhat.io/openshift4/ose-csi-external-snapshotter:v4.9
+- image: registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:f0848810a87a584b730c065455c562dd382329af28752a77deac9e9a0b2f536b
+  name: registry.redhat.io/openshift4/ose-csi-livenessprobe:v4.9
+- image: registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:a4553bb9c8786051fa44eceb7bc719647c08d9c8912ee25823f7f65b10c69e35
+  name: registry.redhat.io/openshift4/ose-csi-node-driver-registrar:v4.9
+schema: olm.bundle
+---
+image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:ac8b60a91411c0fcc4ab2c52db8b6e7682ee747c8969dde9ad8d1a5aa7d44772
+name: kubevirt-hyperconverged-operator.v4.10.1
+package: kubevirt-hyperconverged
+properties:
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hco.kubevirt.io
+    kind: HyperConverged
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1alpha3
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: nodemaintenance.kubevirt.io
+    kind: NodeMaintenance
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: ssp.kubevirt.io
+    kind: SSP
+    version: v1beta1
+- type: olm.package
+  value:
+    packageName: kubevirt-hyperconverged
+    version: 4.10.1
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: '[{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}},{"apiVersion":"networkaddonsoperator.network.kubevirt.io/v1","kind":"NetworkAddonsConfig","metadata":{"name":"cluster"},"spec":{"imagePullPolicy":"IfNotPresent","kubeMacPool":{"rangeEnd":"FD:FF:FF:FF:FF:FF","rangeStart":"02:00:00:00:00:00"},"linuxBridge":{},"macvtap":{},"multus":{},"nmstate":{},"ovs":{}}},{"apiVersion":"kubevirt.io/v1","kind":"KubeVirt","metadata":{"name":"kubevirt","namespace":"kubevirt"},"spec":{"imagePullPolicy":"Always"}},{"apiVersion":"ssp.kubevirt.io/v1beta1","kind":"SSP","metadata":{"name":"ssp-sample","namespace":"kubevirt"},"spec":{"commonTemplates":{"namespace":"kubevirt"},"templateValidator":{"replicas":2}}},{"apiVersion":"cdi.kubevirt.io/v1beta1","kind":"CDI","metadata":{"name":"cdi","namespace":"cdi"},"spec":{"imagePullPolicy":"IfNotPresent"}},{"apiVersion":"nodemaintenance.kubevirt.io/v1beta1","kind":"NodeMaintenance","metadata":{"name":"nodemaintenance-sample"},"spec":{"nodeName":"node02","reason":"Test
+        node maintenance"}},{"apiVersion":"hostpathprovisioner.kubevirt.io/v1beta1","kind":"HostPathProvisioner","metadata":{"name":"hostpath-provisioner"},"spec":{"imagePullPolicy":"IfNotPresent","storagePools":[{"name":"local","path":"/var/hpvolumes","pvcTemplate":{"accessModes":"ReadWriteOnce","resources":{"requests":{"storage":"50Gi"}}}}],"workload":{"nodeSelector":{"kubernetes.io/os":"linux"}}}}]'
+      capabilities: Deep Insights
+      categories: OpenShift Optional
+      certified: "true"
+      containerImage: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:b5ec55c03b0a73733daad346e1e80031063dd5a5e65528e7edc33d9228744368
+      createdAt: "2022-05-02 22:47:23"
+      description: Creates and maintains an OpenShift Virtualization Deployment
+      operatorframework.io/initialization-resource: '{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}}'
+      operatorframework.io/suggested-namespace: openshift-cnv
+      operators.openshift.io/infrastructure-features: '["disconnected","proxy-aware","fips","sno"]'
+      operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+        "OpenShift Container Platform", "OpenShift Platform Plus"]'
+      operators.operatorframework.io/internal-objects: '["networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io","kubevirts.kubevirt.io","ssps.ssp.kubevirt.io","cdis.cdi.kubevirt.io","nodemaintenances.nodemaintenance.kubevirt.io"]'
+      repository: https://github.com/kubevirt/hyperconverged-cluster-operator
+      support: Red Hat
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - description: Represents the deployment of OpenShift Virtualization
+        displayName: OpenShift Virtualization Deployment
+        kind: HyperConverged
+        name: hyperconvergeds.hco.kubevirt.io
+        specDescriptors:
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components node affinity
+          path: infra.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components pod affinity
+          path: infra.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the infra pods.
+          displayName: Infra components pod anti-affinity
+          path: infra.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components node affinity
+          path: workloads.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components pod affinity
+          path: workloads.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the workloads pods.
+          displayName: Workloads components pod anti-affinity
+          path: workloads.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: HIDDEN FIELDS - operator version.
+          displayName: HIDDEN FIELDS - operator version
+          path: version
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:hidden
+        version: v1beta1
+      - description: Cluster Network Addons
+        displayName: Cluster Network Addons
+        kind: NetworkAddonsConfig
+        name: networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io
+        version: v1
+      - description: Represents a KubeVirt deployment
+        displayName: KubeVirt deployment
+        kind: KubeVirt
+        name: kubevirts.kubevirt.io
+        version: v1
+      - description: SSP is the Schema for the ssps API
+        displayName: SSP
+        kind: SSP
+        name: ssps.ssp.kubevirt.io
+        version: v1beta1
+      - description: Represents a CDI deployment
+        displayName: CDI deployment
+        kind: CDI
+        name: cdis.cdi.kubevirt.io
+        version: v1beta1
+      - description: NodeMaintenance is the Schema for the nodemaintenances API
+        displayName: Node Maintenance
+        kind: NodeMaintenance
+        name: nodemaintenances.nodemaintenance.kubevirt.io
+        version: v1beta1
+      - description: Represents a HostPathProvisioner deployment
+        displayName: HostPathProvisioner deployment
+        kind: HostPathProvisioner
+        name: hostpathprovisioners.hostpathprovisioner.kubevirt.io
+        version: v1beta1
+    description: |-
+      # Requirements
+      Your cluster must be installed on bare metal infrastructure with Red Hat Enterprise Linux CoreOS workers.
+
+      # Details
+      **OpenShift Virtualization** extends Red Hat OpenShift Container Platform, allowing you to host and manage virtualized workloads on the same platform as container-based workloads. From the OpenShift Container Platform web console, you can import a VMware virtual machine from vSphere, create new or clone existing VMs, perform live migrations between nodes, and more. You can use OpenShift Virtualization to manage both Linux and Windows VMs.
+
+      The technology behind OpenShift Virtualization is developed in the [KubeVirt](https://kubevirt.io) open source community. The KubeVirt project extends [Kubernetes](https://kubernetes.io) by adding additional virtualization resource types through [Custom Resource Definitions](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/) (CRDs). Administrators can use Custom Resource Definitions to manage `VirtualMachine` resources alongside all other resources that Kubernetes provides.
+    displayName: OpenShift Virtualization
+    installModes:
+    - supported: true
+      type: OwnNamespace
+    - supported: true
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: false
+      type: AllNamespaces
+    keywords:
+    - KubeVirt
+    - Virtualization
+    - VM
+    - CNV
+    - Container-native virtualization
+    - Container native virtualization
+    - Virt
+    - Virtual
+    labels:
+      operatorframework.io/arch.amd64: supported
+      operatorframework.io/os.linux: supported
+    links:
+    - name: Source Code
+      url: https://github.com/kubevirt
+    - name: OpenShift Virtualization
+      url: https://www.openshift.com/learn/topics/virtualization/
+    - name: KubeVirt Project
+      url: https://kubevirt.io
+    maintainers:
+    - email: support@redhat.com
+      name: Red Hat Support
+    maturity: alpha
+    provider:
+      name: Red Hat
+relatedImages:
+- image: registry.redhat.io/container-native-virtualization/bridge-marker@sha256:9f96a6ced0959bfde188df816b9bdba83abe293455f451a7d236c42061fb3818
+  name: registry.redhat.io/container-native-virtualization/bridge-marker:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator@sha256:f94b654f5cb30f20b73f5bb39d621893886959991040c6ba217e7b884519382a
+  name: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins@sha256:f7ac1b5785f6fff511b51ac209034b03a3aa517d4c3213ef12c54a9604fe7744
+  name: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8@sha256:81b7e1a80325cc3768d52406396e6fcddd47223012c3a613afd36d04c517cb4d
+  name: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8:v4.10.1-15
+- image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:ac8b60a91411c0fcc4ab2c52db8b6e7682ee747c8969dde9ad8d1a5aa7d44772
+  name: ""
+- image: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8@sha256:b418d2e719855848f21ec91e2b58e7e4a5a859c70c78f4f13b7d04af8b2b85d7
+  name: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8:v4.10.1-5
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator@sha256:76b1043196f8ce7fd9995317d52ad19ab63e42d07dd561f2205a5ac6446c753a
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator:v4.10.1-6
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8@sha256:968e8a48f5b3ee5e451b1247eb5f1f90fa958a4e586f0d4b8b7f3cded84d1568
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8:v4.10.1-5
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:b5ec55c03b0a73733daad346e1e80031063dd5a5e65528e7edc33d9228744368
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator:v4.10.1-19
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8@sha256:e0ab0914c6f751164e3533b450ae7ccf46e8c50d4b0c35ed53063aa55724e9a9
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8:v4.10.1-19
+- image: registry.redhat.io/container-native-virtualization/kubemacpool@sha256:219dc2ef827b6e6c0506d203078394585f264030beafd640451d1ec651c00df5
+  name: registry.redhat.io/container-native-virtualization/kubemacpool:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8@sha256:b859c374be12d8258bce903c0d9977cfc9c81de977782efef4c6e1de83d5f809
+  name: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator@sha256:1c50c2c04b437a9abba4f6185afb9e09aa68fc9c6d74adf42fc71034a507528b
+  name: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator:v4.10.1-10
+- image: registry.redhat.io/container-native-virtualization/kubevirt-template-validator@sha256:90da448f3adbebb842ef83cc7b0846eefc273356e48a5c35d4be1b61502a7c45
+  name: registry.redhat.io/container-native-virtualization/kubevirt-template-validator:v4.10.1-4
+- image: registry.redhat.io/container-native-virtualization/libguestfs-tools@sha256:43c529451e6c90acaed8a84a6bc8cbff7e7a7bc22e12c8405021039ec898e909
+  name: registry.redhat.io/container-native-virtualization/libguestfs-tools:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/node-maintenance-operator@sha256:d780d46a5f469ff0adaeb373ca0c9815d8bac23953f4f1b310ed7b196ec166e7
+  name: registry.redhat.io/container-native-virtualization/node-maintenance-operator:v4.10.1-4
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-marker@sha256:ef3ed361d43d2184528cd6bb8505ddf731782d827a1abf46d1a2297565bb1728
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-marker:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-plugin@sha256:b288d6d11cb9a9d9a6cc44675285b4ad2045e738d04923fc0fee4431b599fbae
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-plugin:v4.10.1-12
+- image: registry.redhat.io/container-native-virtualization/virt-api@sha256:d86286500965bebb1ac5336dd47189f181dba84b759fbea72c2b650fae654ba7
+  name: registry.redhat.io/container-native-virtualization/virt-api:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virt-artifacts-server@sha256:837f0608431093fe2efff3b038300c962cbe773195350257566e29b52d183fdf
+  name: registry.redhat.io/container-native-virtualization/virt-artifacts-server:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver@sha256:1107f98ac82b6c2d9f32b1dfc82b88c61b2f8489a77e0cede137fa8ab02590e5
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-cloner@sha256:1db8b51568b2e42141b21c2e2ff4414e3ed46279d49a61ccd9beebd5f44ebdde
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-cloner:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-controller@sha256:6a79c13eef86eed7dc48e84af9da4b0274089c588e396329983efef5a12fb374
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-controller:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-importer@sha256:218f34e846ce4bcede87261d712bf130f6158b405b443cdf6491026d12f1f348
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-importer:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-operator@sha256:a89c7cca41a26462ea4c88709334aa82b5bdba09f6b9ac331e12e685cbd5f715
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-operator:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy@sha256:276007b8f0ee7998e5e15c5279b6666daa0c0a97de81c7e2ff8cb45bbcd173db
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver@sha256:6fa1d05b3a81d7456be98220e66915dd501c0c0074f5e5b1350565185fa6a2cc
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver:v4.10.1-16
+- image: registry.redhat.io/container-native-virtualization/virt-controller@sha256:252b57529e38d9f285f4afd171b3a7ea44ae947451049007acac148f7cbcb142
+  name: registry.redhat.io/container-native-virtualization/virt-controller:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virt-handler@sha256:155f61625458f336f4fd7ca24a99d82293187a926ef1a94be21b1bba624ad395
+  name: registry.redhat.io/container-native-virtualization/virt-handler:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virt-launcher@sha256:e5270cccdbbc7c191f69b833d7b813ea20e0a29b0b1adf644ce3630127d4459e
+  name: registry.redhat.io/container-native-virtualization/virt-launcher:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virt-operator@sha256:f9904655a1c579b7db4f55f621852795397c2a01c72d0c420c916ec8f0466024
+  name: registry.redhat.io/container-native-virtualization/virt-operator:v4.10.1-8
+- image: registry.redhat.io/container-native-virtualization/virtio-win@sha256:925386c7a386aa151b1bcf1a7fe7c57eec61920456e7bafbc7f09ce967b38c93
+  name: registry.redhat.io/container-native-virtualization/virtio-win:v4.10.1-4
+- image: registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:106141d7e11e5495f75f497d0eeab106080224a504d3792501bd61722902bbfe
+  name: registry.redhat.io/openshift4/ose-csi-external-provisioner:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-external-snapshotter@sha256:997ff97cbdac7786bc5c8b9c2f0efa667ff0fc4bd02c0345225d79babcb2a912
+  name: registry.redhat.io/openshift4/ose-csi-external-snapshotter:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:6578cc878df9c7339cc8207ae8cbe185361b1fcc8ed69da7ec0346bb94d4a588
+  name: registry.redhat.io/openshift4/ose-csi-livenessprobe:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:8db12de76d7f7e80439ac2a9fb731993fcb46447749664ee804bcc9cf9301859
+  name: registry.redhat.io/openshift4/ose-csi-node-driver-registrar:v4.10
+schema: olm.bundle
+---
+image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:9c10a5c4e5ffad632bc8b4289fe2bc0c181bc7c4c8270a356ac21ebff568a45e
+name: kubevirt-hyperconverged-operator.v4.10.2
+package: kubevirt-hyperconverged
+properties:
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hco.kubevirt.io
+    kind: HyperConverged
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1alpha3
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: nodemaintenance.kubevirt.io
+    kind: NodeMaintenance
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: ssp.kubevirt.io
+    kind: SSP
+    version: v1beta1
+- type: olm.package
+  value:
+    packageName: kubevirt-hyperconverged
+    version: 4.10.2
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: '[{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}},{"apiVersion":"networkaddonsoperator.network.kubevirt.io/v1","kind":"NetworkAddonsConfig","metadata":{"name":"cluster"},"spec":{"imagePullPolicy":"IfNotPresent","kubeMacPool":{"rangeEnd":"FD:FF:FF:FF:FF:FF","rangeStart":"02:00:00:00:00:00"},"linuxBridge":{},"macvtap":{},"multus":{},"nmstate":{},"ovs":{}}},{"apiVersion":"kubevirt.io/v1","kind":"KubeVirt","metadata":{"name":"kubevirt","namespace":"kubevirt"},"spec":{"imagePullPolicy":"Always"}},{"apiVersion":"ssp.kubevirt.io/v1beta1","kind":"SSP","metadata":{"name":"ssp-sample","namespace":"kubevirt"},"spec":{"commonTemplates":{"namespace":"kubevirt"},"templateValidator":{"replicas":2}}},{"apiVersion":"cdi.kubevirt.io/v1beta1","kind":"CDI","metadata":{"name":"cdi","namespace":"cdi"},"spec":{"imagePullPolicy":"IfNotPresent"}},{"apiVersion":"nodemaintenance.kubevirt.io/v1beta1","kind":"NodeMaintenance","metadata":{"name":"nodemaintenance-sample"},"spec":{"nodeName":"node02","reason":"Test
+        node maintenance"}},{"apiVersion":"hostpathprovisioner.kubevirt.io/v1beta1","kind":"HostPathProvisioner","metadata":{"name":"hostpath-provisioner"},"spec":{"imagePullPolicy":"IfNotPresent","storagePools":[{"name":"local","path":"/var/hpvolumes","pvcTemplate":{"accessModes":"ReadWriteOnce","resources":{"requests":{"storage":"50Gi"}}}}],"workload":{"nodeSelector":{"kubernetes.io/os":"linux"}}}}]'
+      capabilities: Deep Insights
+      categories: OpenShift Optional
+      certified: "true"
+      containerImage: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:8d0494ae87c2ef86a580925f57b3b1068aca11cf539c09a528e5463561293fa7
+      createdAt: "2022-05-30 17:19:27"
+      description: Creates and maintains an OpenShift Virtualization Deployment
+      operatorframework.io/initialization-resource: '{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}}'
+      operatorframework.io/suggested-namespace: openshift-cnv
+      operators.openshift.io/infrastructure-features: '["disconnected","proxy-aware","fips","sno"]'
+      operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+        "OpenShift Container Platform", "OpenShift Platform Plus"]'
+      operators.operatorframework.io/internal-objects: '["networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io","kubevirts.kubevirt.io","ssps.ssp.kubevirt.io","cdis.cdi.kubevirt.io","nodemaintenances.nodemaintenance.kubevirt.io"]'
+      repository: https://github.com/kubevirt/hyperconverged-cluster-operator
+      support: Red Hat
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - description: Represents the deployment of OpenShift Virtualization
+        displayName: OpenShift Virtualization Deployment
+        kind: HyperConverged
+        name: hyperconvergeds.hco.kubevirt.io
+        specDescriptors:
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components node affinity
+          path: infra.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components pod affinity
+          path: infra.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the infra pods.
+          displayName: Infra components pod anti-affinity
+          path: infra.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components node affinity
+          path: workloads.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components pod affinity
+          path: workloads.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the workloads pods.
+          displayName: Workloads components pod anti-affinity
+          path: workloads.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: HIDDEN FIELDS - operator version.
+          displayName: HIDDEN FIELDS - operator version
+          path: version
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:hidden
+        version: v1beta1
+      - description: Cluster Network Addons
+        displayName: Cluster Network Addons
+        kind: NetworkAddonsConfig
+        name: networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io
+        version: v1
+      - description: Represents a KubeVirt deployment
+        displayName: KubeVirt deployment
+        kind: KubeVirt
+        name: kubevirts.kubevirt.io
+        version: v1
+      - description: SSP is the Schema for the ssps API
+        displayName: SSP
+        kind: SSP
+        name: ssps.ssp.kubevirt.io
+        version: v1beta1
+      - description: Represents a CDI deployment
+        displayName: CDI deployment
+        kind: CDI
+        name: cdis.cdi.kubevirt.io
+        version: v1beta1
+      - description: NodeMaintenance is the Schema for the nodemaintenances API
+        displayName: Node Maintenance
+        kind: NodeMaintenance
+        name: nodemaintenances.nodemaintenance.kubevirt.io
+        version: v1beta1
+      - description: Represents a HostPathProvisioner deployment
+        displayName: HostPathProvisioner deployment
+        kind: HostPathProvisioner
+        name: hostpathprovisioners.hostpathprovisioner.kubevirt.io
+        version: v1beta1
+    description: |-
+      # Requirements
+      Your cluster must be installed on bare metal infrastructure with Red Hat Enterprise Linux CoreOS workers.
+
+      # Details
+      **OpenShift Virtualization** extends Red Hat OpenShift Container Platform, allowing you to host and manage virtualized workloads on the same platform as container-based workloads. From the OpenShift Container Platform web console, you can import a VMware virtual machine from vSphere, create new or clone existing VMs, perform live migrations between nodes, and more. You can use OpenShift Virtualization to manage both Linux and Windows VMs.
+
+      The technology behind OpenShift Virtualization is developed in the [KubeVirt](https://kubevirt.io) open source community. The KubeVirt project extends [Kubernetes](https://kubernetes.io) by adding additional virtualization resource types through [Custom Resource Definitions](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/) (CRDs). Administrators can use Custom Resource Definitions to manage `VirtualMachine` resources alongside all other resources that Kubernetes provides.
+    displayName: OpenShift Virtualization
+    installModes:
+    - supported: true
+      type: OwnNamespace
+    - supported: true
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: false
+      type: AllNamespaces
+    keywords:
+    - KubeVirt
+    - Virtualization
+    - VM
+    - CNV
+    - Container-native virtualization
+    - Container native virtualization
+    - Virt
+    - Virtual
+    labels:
+      operatorframework.io/arch.amd64: supported
+      operatorframework.io/os.linux: supported
+    links:
+    - name: Source Code
+      url: https://github.com/kubevirt
+    - name: OpenShift Virtualization
+      url: https://www.openshift.com/learn/topics/virtualization/
+    - name: KubeVirt Project
+      url: https://kubevirt.io
+    maintainers:
+    - email: support@redhat.com
+      name: Red Hat Support
+    maturity: alpha
+    provider:
+      name: Red Hat
+relatedImages:
+- image: registry.redhat.io/container-native-virtualization/bridge-marker@sha256:24f6c2a87076b1eccd7664d78c4180293d8f36c4939227f4498869b5417d9d7c
+  name: registry.redhat.io/container-native-virtualization/bridge-marker:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator@sha256:31f3dac937b875da15a04113a8633601edb216cd277e73139c96f32abbbb26c6
+  name: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins@sha256:2df01cbd26d64193b252a18ed019133aa4eed0e1ac727e7a9f5d133426356bda
+  name: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8@sha256:37a2b2f102544ec8e953b473f85505e1d999aa5fde09e1385ebfa365fc4aa732
+  name: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8:v4.10.2-2
+- image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:9c10a5c4e5ffad632bc8b4289fe2bc0c181bc7c4c8270a356ac21ebff568a45e
+  name: ""
+- image: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8@sha256:f1f590470a32617496ff6495ab332fa72423f10b34475db1f9ddf0906f2f48c6
+  name: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator@sha256:7089bd9270497f1ab47ad0632ff62ac80cea477f5197010277ac699b9c498120
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8@sha256:6c9547250a4a0c43106a2345ce2861335f2e7f64ae09590b4355b65ec3e63b63
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:8d0494ae87c2ef86a580925f57b3b1068aca11cf539c09a528e5463561293fa7
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator:v4.10.2-2
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8@sha256:8d9c279d244caeb64cc3265176c17cb7ef44a12c7037963c0f46b5045fceca04
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8:v4.10.2-2
+- image: registry.redhat.io/container-native-virtualization/kubemacpool@sha256:9b48f6730acf7df49c94f2459f023e3c8b74acf1c8629b1605fb97ae9f2f20a3
+  name: registry.redhat.io/container-native-virtualization/kubemacpool:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8@sha256:0cf2c1d9d78870b74cb52b3d2c7a0c6e262e2018f8ab5d053915c81c5c4b37db
+  name: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator@sha256:872c91c16ce0eb5550c768d252f06102a2c8ab74f266dd2eb21faf9bf852a6b1
+  name: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator:v4.10.2-4
+- image: registry.redhat.io/container-native-virtualization/kubevirt-template-validator@sha256:7c465509bace15d8217a5af05fb834c6eb19956ea50bd5b706bcd60bd4545d82
+  name: registry.redhat.io/container-native-virtualization/kubevirt-template-validator:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/libguestfs-tools@sha256:34f1e9020cb181a9a38df2b247f303630df6835c6d0cbc57a426484e59ca64ad
+  name: registry.redhat.io/container-native-virtualization/libguestfs-tools:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/node-maintenance-operator@sha256:d65f815868d254a38db4c53f03c133382207cd6503fa74fbca7973a2325205de
+  name: registry.redhat.io/container-native-virtualization/node-maintenance-operator:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-marker@sha256:c9378725cd60832a298978aee6f949013abaa22d6ccaf7ca7d0817ee2ae4ef1a
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-marker:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-plugin@sha256:99e440eea62f49a28d2829f1d6e1f967b91557bcd4832f50bf902ae95bd16bd2
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-plugin:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-api@sha256:5714ba5eca6550cf941f4d15b36a06d8137f1e38fda93f361f14f40346381356
+  name: registry.redhat.io/container-native-virtualization/virt-api:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virt-artifacts-server@sha256:1a5d0a5ec922da872a67fc88d018b72fb7a87afb9f7d071228ffe9fafaca746e
+  name: registry.redhat.io/container-native-virtualization/virt-artifacts-server:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver@sha256:678003d57f3eda45fadc42175d28c09f71df9763d73cb29e2c8818517a9b6157
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-cloner@sha256:c549427f3c9dbe05ef209f3c7306cb9d91b8911c83551fa1ea5bcbccd3cbec4e
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-cloner:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-controller@sha256:bd93a7ac96ad92d6c123d71bc36d4ca75492de26483a2ccef58e39572dd9a415
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-controller:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-importer@sha256:f736bd858be80be5a372f28d2277de9b23dfff712597ad7ae69880cb6cb4fe75
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-importer:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-operator@sha256:42fe7e6ff393382e9a1df929f23146dafa3e5336404fa97dfa783f0cc6fedb61
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-operator:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy@sha256:4d8a0c56af74d8ee122bc4a6f283b92bcd847d9a2abebfc8c2b97c7a3d7c170f
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver@sha256:e3900f37a18744751c152901754401c4afbdffacaecd07b2a2e3ec7e2e4fa282
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver:v4.10.2-3
+- image: registry.redhat.io/container-native-virtualization/virt-controller@sha256:ec9b468491ac4e9886aa1796494655f3933c04c71f106e85780601f3fcd186ec
+  name: registry.redhat.io/container-native-virtualization/virt-controller:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virt-handler@sha256:d5cab2c4e9a97e55efef53f6ceb1163574043cb06756d3ecdd4703c1a5d1c5e5
+  name: registry.redhat.io/container-native-virtualization/virt-handler:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virt-launcher@sha256:9aaa4bfd6e0569350d43d6996213f71c61a759eafab5857c81293069e4a30781
+  name: registry.redhat.io/container-native-virtualization/virt-launcher:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virt-operator@sha256:cd09ffdaabfd3ff9254892a5a95c754f54bb3765d565947b9c49c77e44b56626
+  name: registry.redhat.io/container-native-virtualization/virt-operator:v4.10.2-1
+- image: registry.redhat.io/container-native-virtualization/virtio-win@sha256:60f51ca8a888e950aa736b10a7351564e49c04191242d3977ad9a69c96dd7f03
+  name: registry.redhat.io/container-native-virtualization/virtio-win:v4.10.2-1
+- image: registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:95010584242f9705ffad17632bd11cf1299955b986d1e5b4b8892f9fda75bb00
+  name: registry.redhat.io/openshift4/ose-csi-external-provisioner:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-external-snapshotter@sha256:cb781aff7b4ead2e0535274186b5e97274d734e19e9ef404e187bc39d11bb2cc
+  name: registry.redhat.io/openshift4/ose-csi-external-snapshotter:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:b9db5f0eb8a4d145b6f5a89e12d3361a04616e27b8b8d4bcdfd2c1545f6dc407
+  name: registry.redhat.io/openshift4/ose-csi-livenessprobe:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:90792483c531bfa2c51e5be45efdc0e52e3e2461a4c9a6921428d719415dc8b0
+  name: registry.redhat.io/openshift4/ose-csi-node-driver-registrar:v4.10
+schema: olm.bundle
+---
+image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:34cf9e0dd3cc07c487b364c30b3f95bf352be8ca4fe89d473fc624ad7283651d
+name: kubevirt-hyperconverged-operator.v4.10.3
+package: kubevirt-hyperconverged
+properties:
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: cdi.kubevirt.io
+    kind: CDI
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hco.kubevirt.io
+    kind: HyperConverged
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: hostpathprovisioner.kubevirt.io
+    kind: HostPathProvisioner
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1
+- type: olm.gvk
+  value:
+    group: kubevirt.io
+    kind: KubeVirt
+    version: v1alpha3
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1
+- type: olm.gvk
+  value:
+    group: networkaddonsoperator.network.kubevirt.io
+    kind: NetworkAddonsConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: nodemaintenance.kubevirt.io
+    kind: NodeMaintenance
+    version: v1beta1
+- type: olm.gvk
+  value:
+    group: ssp.kubevirt.io
+    kind: SSP
+    version: v1beta1
+- type: olm.package
+  value:
+    packageName: kubevirt-hyperconverged
+    version: 4.10.3
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: '[{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}},{"apiVersion":"networkaddonsoperator.network.kubevirt.io/v1","kind":"NetworkAddonsConfig","metadata":{"name":"cluster"},"spec":{"imagePullPolicy":"IfNotPresent","kubeMacPool":{"rangeEnd":"FD:FF:FF:FF:FF:FF","rangeStart":"02:00:00:00:00:00"},"linuxBridge":{},"macvtap":{},"multus":{},"nmstate":{},"ovs":{}}},{"apiVersion":"kubevirt.io/v1","kind":"KubeVirt","metadata":{"name":"kubevirt","namespace":"kubevirt"},"spec":{"imagePullPolicy":"Always"}},{"apiVersion":"ssp.kubevirt.io/v1beta1","kind":"SSP","metadata":{"name":"ssp-sample","namespace":"kubevirt"},"spec":{"commonTemplates":{"namespace":"kubevirt"},"templateValidator":{"replicas":2}}},{"apiVersion":"cdi.kubevirt.io/v1beta1","kind":"CDI","metadata":{"name":"cdi","namespace":"cdi"},"spec":{"imagePullPolicy":"IfNotPresent"}},{"apiVersion":"nodemaintenance.kubevirt.io/v1beta1","kind":"NodeMaintenance","metadata":{"name":"nodemaintenance-sample"},"spec":{"nodeName":"node02","reason":"Test
+        node maintenance"}},{"apiVersion":"hostpathprovisioner.kubevirt.io/v1beta1","kind":"HostPathProvisioner","metadata":{"name":"hostpath-provisioner"},"spec":{"imagePullPolicy":"IfNotPresent","storagePools":[{"name":"local","path":"/var/hpvolumes","pvcTemplate":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"50Gi"}}}}],"workload":{"nodeSelector":{"kubernetes.io/os":"linux"}}}}]'
+      capabilities: Deep Insights
+      categories: OpenShift Optional
+      certified: "true"
+      containerImage: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:4382dee6f0babedd8d118e904c5ab49763dae4a56c8ddeb9c974205f9cff2d11
+      createdAt: "2022-07-14 01:17:45"
+      description: Creates and maintains an OpenShift Virtualization Deployment
+      operatorframework.io/initialization-resource: '{"apiVersion":"hco.kubevirt.io/v1beta1","kind":"HyperConverged","metadata":{"annotations":{"deployOVS":"false"},"name":"kubevirt-hyperconverged","namespace":"openshift-cnv"},"spec":{}}'
+      operatorframework.io/suggested-namespace: openshift-cnv
+      operators.openshift.io/infrastructure-features: '["disconnected","proxy-aware","fips","sno"]'
+      operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+        "OpenShift Container Platform", "OpenShift Platform Plus"]'
+      operators.operatorframework.io/internal-objects: '["networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io","kubevirts.kubevirt.io","ssps.ssp.kubevirt.io","cdis.cdi.kubevirt.io","nodemaintenances.nodemaintenance.kubevirt.io"]'
+      repository: https://github.com/kubevirt/hyperconverged-cluster-operator
+      support: Red Hat
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - description: Represents the deployment of OpenShift Virtualization
+        displayName: OpenShift Virtualization Deployment
+        kind: HyperConverged
+        name: hyperconvergeds.hco.kubevirt.io
+        specDescriptors:
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components node affinity
+          path: infra.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            infra pods.
+          displayName: Infra components pod affinity
+          path: infra.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the infra pods.
+          displayName: Infra components pod anti-affinity
+          path: infra.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: nodeAffinity describes node affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components node affinity
+          path: workloads.nodePlacement.affinity.nodeAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:nodeAffinity
+        - description: podAffinity describes pod affinity scheduling rules for the
+            workloads pods.
+          displayName: Workloads components pod affinity
+          path: workloads.nodePlacement.affinity.podAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAffinity
+        - description: podAntiAffinity describes pod anti affinity scheduling rules
+            for the workloads pods.
+          displayName: Workloads components pod anti-affinity
+          path: workloads.nodePlacement.affinity.podAntiAffinity
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:podAntiAffinity
+        - description: HIDDEN FIELDS - operator version.
+          displayName: HIDDEN FIELDS - operator version
+          path: version
+          x-descriptors:
+          - urn:alm:descriptor:com.tectonic.ui:hidden
+        version: v1beta1
+      - description: Cluster Network Addons
+        displayName: Cluster Network Addons
+        kind: NetworkAddonsConfig
+        name: networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io
+        version: v1
+      - description: Represents a KubeVirt deployment
+        displayName: KubeVirt deployment
+        kind: KubeVirt
+        name: kubevirts.kubevirt.io
+        version: v1
+      - description: SSP is the Schema for the ssps API
+        displayName: SSP
+        kind: SSP
+        name: ssps.ssp.kubevirt.io
+        version: v1beta1
+      - description: Represents a CDI deployment
+        displayName: CDI deployment
+        kind: CDI
+        name: cdis.cdi.kubevirt.io
+        version: v1beta1
+      - description: NodeMaintenance is the Schema for the nodemaintenances API
+        displayName: Node Maintenance
+        kind: NodeMaintenance
+        name: nodemaintenances.nodemaintenance.kubevirt.io
+        version: v1beta1
+      - description: Represents a HostPathProvisioner deployment
+        displayName: HostPathProvisioner deployment
+        kind: HostPathProvisioner
+        name: hostpathprovisioners.hostpathprovisioner.kubevirt.io
+        version: v1beta1
+    description: |-
+      # Requirements
+      Your cluster must be installed on bare metal infrastructure with Red Hat Enterprise Linux CoreOS workers.
+
+      # Details
+      **OpenShift Virtualization** extends Red Hat OpenShift Container Platform, allowing you to host and manage virtualized workloads on the same platform as container-based workloads. From the OpenShift Container Platform web console, you can import a VMware virtual machine from vSphere, create new or clone existing VMs, perform live migrations between nodes, and more. You can use OpenShift Virtualization to manage both Linux and Windows VMs.
+
+      The technology behind OpenShift Virtualization is developed in the [KubeVirt](https://kubevirt.io) open source community. The KubeVirt project extends [Kubernetes](https://kubernetes.io) by adding additional virtualization resource types through [Custom Resource Definitions](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/) (CRDs). Administrators can use Custom Resource Definitions to manage `VirtualMachine` resources alongside all other resources that Kubernetes provides.
+    displayName: OpenShift Virtualization
+    installModes:
+    - supported: true
+      type: OwnNamespace
+    - supported: true
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: false
+      type: AllNamespaces
+    keywords:
+    - KubeVirt
+    - Virtualization
+    - VM
+    - CNV
+    - Container-native virtualization
+    - Container native virtualization
+    - Virt
+    - Virtual
+    labels:
+      operatorframework.io/arch.amd64: supported
+      operatorframework.io/os.linux: supported
+    links:
+    - name: Source Code
+      url: https://github.com/kubevirt
+    - name: OpenShift Virtualization
+      url: https://www.openshift.com/learn/topics/virtualization/
+    - name: KubeVirt Project
+      url: https://kubevirt.io
+    maintainers:
+    - email: support@redhat.com
+      name: Red Hat Support
+    maturity: alpha
+    provider:
+      name: Red Hat
+relatedImages:
+- image: registry.redhat.io/container-native-virtualization/bridge-marker@sha256:fa4d883c62edae2d81dd892e768ad92a2fbe934e8371137be5418429e7f5559e
+  name: registry.redhat.io/container-native-virtualization/bridge-marker:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator@sha256:ecda5f10d29deb79ff5f21e0eba6365f57f672b6e10737cad1ea8edb2bb1b458
+  name: registry.redhat.io/container-native-virtualization/cluster-network-addons-operator:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins@sha256:9762c5949b40787ff82e911fdf1a7e9e2cbcee91017a93c986f7c23641f73179
+  name: registry.redhat.io/container-native-virtualization/cnv-containernetworking-plugins:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8@sha256:7e48babf609c52604531c0b68b9da6aa82addca3d467ab4cbf54eb6633d56d4b
+  name: registry.redhat.io/container-native-virtualization/cnv-must-gather-rhel8:v4.10.3-5
+- image: registry.redhat.io/container-native-virtualization/hco-bundle-registry@sha256:34cf9e0dd3cc07c487b364c30b3f95bf352be8ca4fe89d473fc624ad7283651d
+  name: ""
+- image: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8@sha256:d4e04e4953e92c434f3fb786946d51653bf538bc856e8fd3b0d19fa1ff8fa336
+  name: registry.redhat.io/container-native-virtualization/hostpath-csi-driver-rhel8:v4.10.3-1
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator@sha256:0b3881bb921330b0b524481dc6cd21a53edfeb9ae75f5d2c6e4ad7c40bb90c7d
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8-operator:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8@sha256:46120acc684bd978fde53053e6793b638a8caecaa8b5c1a9ba33a2b291aff65e
+  name: registry.redhat.io/container-native-virtualization/hostpath-provisioner-rhel8:v4.10.3-1
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator@sha256:4382dee6f0babedd8d118e904c5ab49763dae4a56c8ddeb9c974205f9cff2d11
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-operator:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8@sha256:762f4721045fc43c304d76d07821a3aea9cb102224afc072c2471c1f321615ec
+  name: registry.redhat.io/container-native-virtualization/hyperconverged-cluster-webhook-rhel8:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/kubemacpool@sha256:2a8d17b31cd47159629bdf544d7336437384c5960d85f75313339ea50c1b9992
+  name: registry.redhat.io/container-native-virtualization/kubemacpool:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8@sha256:63f3dda95be6b1702b2f5bf08e2bd48bcbbd61f3a3da96fc9feab3daa7f82b36
+  name: registry.redhat.io/container-native-virtualization/kubernetes-nmstate-handler-rhel8:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator@sha256:a3ed37354263059e597710dcf668805e39dab6173a1348155591629242e408d5
+  name: registry.redhat.io/container-native-virtualization/kubevirt-ssp-operator:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/kubevirt-template-validator@sha256:52028a3218ea5570144b4a626ab07fa843144deec3bbe87f02a3fb26e70a06c3
+  name: registry.redhat.io/container-native-virtualization/kubevirt-template-validator:v4.10.3-1
+- image: registry.redhat.io/container-native-virtualization/libguestfs-tools@sha256:613a36a5d70c2a2b85718b139a82e611f671d185423bee790b850413da90f05c
+  name: registry.redhat.io/container-native-virtualization/libguestfs-tools:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/node-maintenance-operator@sha256:629a8621632f996c672df5b97621b66c157c484ac411284d0812f866473303fb
+  name: registry.redhat.io/container-native-virtualization/node-maintenance-operator:v4.10.3-1
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-marker@sha256:3ec501dc4208d9e0ecb2bebd32426d7301f987a95f2660abca99f07e943bdf89
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-marker:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/ovs-cni-plugin@sha256:0fffb98418ec168eafbd182e2fe1d72aa48a899d42269a456f3c4b6dba0cff17
+  name: registry.redhat.io/container-native-virtualization/ovs-cni-plugin:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-api@sha256:599c3e4ff242c44586dce63a350d59c7682d4cdbdddf5850ae8c2c5edf5797f9
+  name: registry.redhat.io/container-native-virtualization/virt-api:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-artifacts-server@sha256:f14a3a00c7a61336e450962bcddf045da204a1fdc3cf1624b99d0d1766b4226f
+  name: registry.redhat.io/container-native-virtualization/virt-artifacts-server:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver@sha256:d53346e13107cea6ae7166334492ee834d5e143877cac39f3cfaaea0ef8e007d
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-apiserver:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-cloner@sha256:52fbf1904b4eead359a5d2184884524bfe2f5eb739f6642828814ee90e0528f3
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-cloner:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-controller@sha256:a1419d43327c0eccedfba7af96d3adfd4eda77eb92731bef11088e37bc493a5c
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-controller:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-importer@sha256:1f781f7cde9c4c1eba37e2cf0c4a382b9600e8009abefb99c24e8cc5c721c8e1
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-importer:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-operator@sha256:46dc6b75a8ca26b62dce7e24aaaa0f3dd718ebf7489826dbeea13b2bc1626656
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-operator:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy@sha256:9f93a5ffa4f9910142004e20c148787b4ee54c7500664865029a6930a9f6c5ba
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadproxy:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver@sha256:acdbe1297c9e3c9862063ede779ac771d1b7635808f166ed1c4e87583d2f5b4c
+  name: registry.redhat.io/container-native-virtualization/virt-cdi-uploadserver:v4.10.3-3
+- image: registry.redhat.io/container-native-virtualization/virt-controller@sha256:de0e67a97b0003aff3c26967944cf5e32b56a2027fc7efee8660db6395b54f72
+  name: registry.redhat.io/container-native-virtualization/virt-controller:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-handler@sha256:0564691a9d86a37f9acb02f59dab9cc4d8f2409b921b798e8a2a8402912d2893
+  name: registry.redhat.io/container-native-virtualization/virt-handler:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-launcher@sha256:f8ea1d179a877d2f010b835c6d3ea375e2af0c9b5d7f19432b644b846c8130ca
+  name: registry.redhat.io/container-native-virtualization/virt-launcher:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virt-operator@sha256:2be1c7e498ea2e2cbe07b3d4c13f51f876b3c925a0b6e846aa7a7d29639f6cea
+  name: registry.redhat.io/container-native-virtualization/virt-operator:v4.10.3-4
+- image: registry.redhat.io/container-native-virtualization/virtio-win@sha256:df994d8f4deaa10dd80245ab2eeaf225f59eaafdf3095f4f8709809802f9a5b6
+  name: registry.redhat.io/container-native-virtualization/virtio-win:v4.10.3-1
+- image: registry.redhat.io/openshift4/ose-csi-external-provisioner@sha256:9c25ec2a29e9c4f8be8658e86fc22a9bec060262c28893ae60ec4c2216a19fc3
+  name: registry.redhat.io/openshift4/ose-csi-external-provisioner:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-external-snapshotter@sha256:d00cd0f5aa54416143f000f9edcc9c9a93cf8eaeb41e479cf73d5fe9129bbc52
+  name: registry.redhat.io/openshift4/ose-csi-external-snapshotter:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-livenessprobe@sha256:d8e6aaedc68c9872918b6260ba6431820b4d57944b5106a1590c5b382f185ebc
+  name: registry.redhat.io/openshift4/ose-csi-livenessprobe:v4.10
+- image: registry.redhat.io/openshift4/ose-csi-node-driver-registrar@sha256:c57cfcb86040e4127c80124acf077e18f6a8bc66607fb3b56f3edd2397797963
+  name: registry.redhat.io/openshift4/ose-csi-node-driver-registrar:v4.10
+schema: olm.bundle

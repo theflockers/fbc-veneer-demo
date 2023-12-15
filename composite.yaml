@@ -9,7 +9,7 @@ components:
         schema: olm.builder.basic
         config: 
           input: components/4.13.yaml
-          output: catalog.json
+          output: catalog.yaml
   - name: "4.12"
     destination:
       path: 4.12/catalog
@@ -19,7 +19,7 @@ components:
         schema: olm.builder.basic
         config: 
           input: components/4.12.yaml
-          output: catalog.json
+          output: catalog.yaml
   - name: "4.14"
     destination:
       path: 4.14/catalog
@@ -29,4 +29,4 @@ components:
         schema: olm.builder.basic
         config: 
           input: components/4.14.yaml
-          output: catalog.json
+          output: catalog.yaml
