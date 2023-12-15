@@ -1,7 +1,7 @@
 schemaVersion: 2.2.0
 metadata:
-  name: fbc-4.13
-  displayName: FBC 4.13
+  name: fbc-4.14
+  displayName: FBC 4.14
   description: 'File based catalog'
   language: fbc
   provider: Red Hat
@@ -35,7 +35,7 @@ components:
                   resources:
                     limits:
                       memory: "1024Mi"
-                      cpu: "500m"
+                      cpu: "500m" 
     attributes:
       deployment/container-port: 50051
       deployment/cpuRequest: "100m"
